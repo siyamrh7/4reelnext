@@ -13,6 +13,23 @@ const TZ           = process.env.STUDIO_TIMEZONE || 'Europe/Amsterdam';
 const STUDIO_EMAIL = process.env.STUDIO_NOTIFY_EMAIL;
 const STUDIO_NAME  = process.env.STUDIO_NAME || '4REEL Studio';
 
+/**
+ * A booking's date/time is a wall-clock time in `zone` (the studio's
+ * timezone), not the server's. `new Date("2026-08-14T11:00:00")` silently
+ * parses using the SERVER's local timezone though — fine when server and
+ * studio share a zone, wrong (and wrong differently depending on where the
+ * process happens to run) otherwise. This resolves the wall-clock time to
+ * the correct absolute instant regardless of the server's own timezone.
+ */
+function zonedTimeToUtc(dateStr, timeStr, zone) {
+  const [Y, M, D] = dateStr.split('-').map(Number);
+  const [h, m] = timeStr.split(':').map(Number);
+  const guess = new Date(Date.UTC(Y, M - 1, D, h, m));
+  const asZoned = new Date(guess.toLocaleString('en-US', { timeZone: zone }));
+  const asUtc = new Date(guess.toLocaleString('en-US', { timeZone: 'UTC' }));
+  return new Date(guess.getTime() - (asZoned.getTime() - asUtc.getTime()));
+}
+
 const BookingSchema = z.object({
   name: z.string().min(2).max(120),
   email: z.string().email(),
@@ -98,13 +115,18 @@ export async function POST(request) {
     }
   }
 
+  const startUtc = zonedTimeToUtc(b.date, b.time, TZ);
+
   // --- .ics fallback ---
+  // startInputType/OutputType 'utc' so the file carries an absolute instant
+  // (Z-suffixed) instead of a floating time — otherwise calendar apps
+  // display it in the viewer's own device timezone, not the studio's.
   let icsContent = null;
   try {
-    const [Y, M, D] = b.date.split('-').map(Number);
-    const [h, m] = b.time.split(':').map(Number);
     const result = createEvent({
-      start: [Y, M, D, h, m],
+      start: [startUtc.getUTCFullYear(), startUtc.getUTCMonth() + 1, startUtc.getUTCDate(), startUtc.getUTCHours(), startUtc.getUTCMinutes()],
+      startInputType: 'utc',
+      startOutputType: 'utc',
       duration: { minutes: b.durationMinutes },
       title: `4REEL · Intake met ${b.name}`,
       description: b.message || 'Intake gesprek met 4REEL Studio.',
@@ -117,9 +139,7 @@ export async function POST(request) {
   } catch (e) { console.error('ICS build failed', e); }
 
   // --- Mails ---
-  const dateFmt = new Date(`${b.date}T${b.time}:00`).toLocaleString('nl-NL', {
-    dateStyle: 'full', timeStyle: 'short', timeZone: TZ,
-  });
+  const dateFmt = startUtc.toLocaleString('nl-NL', { dateStyle: 'full', timeStyle: 'short', timeZone: TZ });
   await sendBookingMails({ booking: doc.toObject(), dateFmt, icsContent });
 
   // --- Webhook to admin platform ---

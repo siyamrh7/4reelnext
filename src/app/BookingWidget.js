@@ -182,6 +182,7 @@ export default function BookingWidget() {
       setSlots([]);
       setSlotsState('idle');
       if (!isAsk) setBookingThanks(true);
+      setSubmitting(false);
     } catch (err) {
       console.error('Booking failed:', err);
       setSubmitState('error');
@@ -296,14 +297,13 @@ export default function BookingWidget() {
           )}
 
           <button
-            className="submit"
+            className={`submit${submitting ? ' is-busy' : ''}${submitState === 'success' ? ' is-success' : ''}${submitState === 'error' ? ' is-error' : ''}`}
             type="submit"
             id="plan-submit"
             disabled={submitting || submitState === 'success'}
-            style={submitState === 'success' ? { background: 'var(--accent)', color: 'var(--ink)' } : undefined}
           >
             <span className="submit-label">{submitLabel}</span>
-            <span className="arrow">→</span>
+            {submitting ? <span className="spinner" aria-hidden="true"></span> : <span className="arrow">→</span>}
           </button>
           <span className="alt">of mail direct <a href="mailto:info@4reelagency.nl">info@4reelagency.nl</a></span>
         </form>
