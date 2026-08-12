@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * One card in the reel-03 phone rack. Starts paused on a poster frame;
@@ -14,6 +14,28 @@ export default function PhoneCard({
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
 
+  // The global cursor tracker (PageEffects) only re-checks data-cursor on
+  // mouseover (element enter), not on click — so without this, clicking to
+  // play without the mouse leaving/re-entering leaves the "play" cursor
+  // bubble stuck on screen over an already-playing video.
+  useEffect(() => {
+    if (!playing) return;
+    document.getElementById('cursor')?.classList.remove('play', 'link');
+  }, [playing]);
+
+  // Auto-pause once swiped/scrolled out of view — the rack scrolls
+  // horizontally on mobile, so without this a video keeps playing (with
+  // sound) off-screen after the user swipes to the next card.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting && !v.paused) v.pause();
+    }, { threshold: 0.2 });
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+
   function toggle() {
     const v = videoRef.current;
     if (!v) return;
@@ -26,7 +48,7 @@ export default function PhoneCard({
   }
 
   return (
-    <article className={`phone${playing ? ' is-playing' : ''}`} data-cursor="play" onClick={toggle}>
+    <article className={`phone${playing ? ' is-playing' : ''}`} data-cursor={playing ? undefined : 'play'} onClick={toggle}>
       <div className="phone-idx">{idx}</div>
       <div className="phone-frame">
         <div className="phone-notch"></div>
