@@ -420,6 +420,7 @@ export default function Page() {
               <div className="row"><span className="l">EDITOR</span><span className="dot"></span><span className="r">Matthew van Senten</span></div>
               <div className="row"><span className="l">OPERATIONAL &amp; STRATEGY</span><span className="dot"></span><span className="r">Ray Drisdale</span></div>
               <div className="row"><span className="l">SALES &amp; FINANCE</span><span className="dot"></span><span className="r">Boy Hardenberg</span></div>
+              <div className="row"><span className="l">PROJECT MANAGER</span><span className="dot"></span><span className="r">Rick Brouwer</span></div>
             </div>
 
             <div>
