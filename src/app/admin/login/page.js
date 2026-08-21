@@ -40,7 +40,7 @@ function LoginForm() {
       <div className="a-login-card">
         <div className="a-brand">
           <span className="dot"></span>
-          <span className="text">4REEL.STUDIO</span>
+          <span className="text">4REEL.AGENCY</span>
         </div>
         <h1>Admin panel</h1>
         <p>Log in met het admin-wachtwoord.</p>

@@ -25,7 +25,7 @@ export default function AdminNav() {
       <div className="a-brand">
         <span className="dot"></span>
         <div>
-          <div className="text">4REEL.STUDIO</div>
+          <div className="text">4REEL.AGENCY</div>
           <div className="sub mono">ADMIN</div>
         </div>
       </div>

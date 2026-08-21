@@ -11,7 +11,7 @@
 import nodemailer from 'nodemailer';
 
 const STUDIO_EMAIL = process.env.STUDIO_NOTIFY_EMAIL;
-const STUDIO_NAME   = process.env.STUDIO_NAME || '4REEL Studio';
+const STUDIO_NAME   = process.env.STUDIO_NAME || '4REEL Agency';
 const MAIL_FROM     = process.env.MAIL_FROM || `${STUDIO_NAME} <${process.env.SMTP_USER || 'noreply@4reelagency.nl'}>`;
 
 export const mailer = (process.env.SMTP_USER && process.env.SMTP_APP_PASSWORD)
@@ -29,7 +29,7 @@ export function esc(s) {
 
 export function customerHtml({ name, dateFmt, meetLink }) {
   return `<div style="font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;padding:20px;color:#0a0a0a">
-  <div style="background:#0a0a0a;padding:18px 20px;color:#d4ff00;font-family:'IBM Plex Mono',monospace;letter-spacing:.2em;font-size:11px;text-transform:uppercase">● REC — 4REEL STUDIO</div>
+  <div style="background:#0a0a0a;padding:18px 20px;color:#d4ff00;font-family:'IBM Plex Mono',monospace;letter-spacing:.2em;font-size:11px;text-transform:uppercase">● REC — 4REEL AGENCY</div>
   <h2 style="margin:24px 0 8px;font-size:24px">Bevestigd, ${esc(name.split(' ')[0])}.</h2>
   <p style="font-size:15px;line-height:1.5;color:#444">Je gesprek met 4REEL staat ingepland. Hieronder alle details — de afspraak staat al in onze agenda.</p>
   <div style="border:1.5px solid #0a0a0a;padding:16px 18px;margin:18px 0;background:#f4f1ea">
@@ -39,7 +39,7 @@ export function customerHtml({ name, dateFmt, meetLink }) {
   ${meetLink ? `<div style="margin:18px 0"><a href="${esc(meetLink)}" style="display:inline-block;background:#d4ff00;color:#0a0a0a;padding:14px 20px;text-decoration:none;font-weight:600;font-family:'IBM Plex Mono',monospace;letter-spacing:.18em;text-transform:uppercase;font-size:13px">Open Google Meet →</a></div>` : `<p style="color:#a00;font-size:13px">⚠️ De Google Meet link volgt apart per mail.</p>`}
   <p style="font-size:13px;color:#666;margin-top:24px">Niet meer beschikbaar? Reply op deze mail en we vinden een ander moment.</p>
   <hr style="border:0;border-top:1px solid #ddd;margin:24px 0">
-  <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#888">4REEL STUDIO · AMERSFOORT NL · INFO@4REELAGENCY.NL</p>
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#888">4REEL AGENCY · AMERSFOORT NL · INFO@4REELAGENCY.NL</p>
 </div>`;
 }
 

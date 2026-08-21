@@ -52,7 +52,7 @@ export default function Page() {
 
       <a className="wordmark" href="#reel-01" data-cursor="link">
         <span className="dot"></span>
-        <span className="text">4REEL.STUDIO</span>
+        <span className="text">4REEL.AGENCY</span>
       </a>
 
       <div className="timecode">
@@ -101,7 +101,7 @@ export default function Page() {
             <span>SHORT-FORM CONTENT AGENCY · AMERSFOORT · EST. 2025</span>
           </div>
 
-          <h1 className="mega-logo" id="mega" aria-label="4REEL Studio">
+          <h1 className="mega-logo" id="mega" aria-label="4REEL Agency">
             <span className="logo-stack">
               <span className="card-stack" aria-hidden="true">
                 <span data-label="FRAME 02 — TAKE 04"></span>
@@ -115,7 +115,7 @@ export default function Page() {
 
               <img className="logo-img main" src="/images/mega-logo.png" alt="4REEL" />
             </span>
-            <span className="logo-studio"><span className="acc">●</span> STUDIO <span className="tick"></span> EST. <span className="est">2025</span></span>
+            <span className="logo-studio"><span className="acc">●</span> AGENCY <span className="tick"></span> EST. <span className="est">2025</span></span>
           </h1>
 
           <p className="tag" data-fade>Short form content, <em>frame voor frame</em> gebouwd om te scoren.</p>
@@ -477,7 +477,7 @@ export default function Page() {
       </div>
 
       <div className="footer">
-        <div>©2025 4REEL STUDIO · ALLE RECHTEN VOORBEHOUDEN</div>
+        <div>©2025 4REEL AGENCY · ALLE RECHTEN VOORBEHOUDEN</div>
         <div className="center">PROD. NR. 4R-V04 · MASTER 23.976FPS · DCP</div>
         <div className="right">EINDE VAN DE REEL</div>
       </div>

@@ -11,7 +11,7 @@ import { bookingRateLimit, clientIp } from '@/lib/rateLimit';
 
 const TZ           = process.env.STUDIO_TIMEZONE || 'Europe/Amsterdam';
 const STUDIO_EMAIL = process.env.STUDIO_NOTIFY_EMAIL;
-const STUDIO_NAME  = process.env.STUDIO_NAME || '4REEL Studio';
+const STUDIO_NAME  = process.env.STUDIO_NAME || '4REEL Agency';
 
 /**
  * A booking's date/time is a wall-clock time in `zone` (the studio's
@@ -129,7 +129,7 @@ export async function POST(request) {
       startOutputType: 'utc',
       duration: { minutes: b.durationMinutes },
       title: `4REEL · Intake met ${b.name}`,
-      description: b.message || 'Intake gesprek met 4REEL Studio.',
+      description: b.message || 'Intake gesprek met 4REEL Agency.',
       location: doc.meetLink || 'Google Meet — link volgt',
       url: doc.meetLink || undefined,
       organizer: { name: STUDIO_NAME, email: STUDIO_EMAIL },
