@@ -24,7 +24,7 @@ const HERO_TILES = [
   { cls: 't1', label: 'CAM 18 · 24FPS' },
 ];
 
-// 6 unique client logos, each repeated 4x for a seamless marquee loop — the
+// 12 unique client logos, each repeated 2x for a seamless marquee loop — the
 // second half (aria-hidden) is what makes the scroll wrap invisibly. Each
 // logo needs its own CSS class (globals.css .lw-slot img.lw-*) that caps
 // max-height/max-width — without it, an image renders at its native
@@ -37,8 +37,15 @@ const LOGO_BRANDS = [
   { file: 'logo-04.webp', alt: 'Label A Team', cls: 'lw-labelateam' },
   { file: 'logo-05.svg', alt: 'Reform Pilates', cls: 'lw-reform' },
   { file: 'logo-06.png', alt: 'NoordCode', cls: 'lw-noord' },
+  { file: 'logo-07.svg', alt: 'Bergman Clinics', cls: 'lw-bergman' },
+  { file: 'logo-08.svg', alt: 'Bear Baby Boutique', cls: 'lw-bear' },
+  { file: 'logo-09.png', alt: 'Kas Douma Dakdekkers', cls: 'lw-douma' },
+  { file: 'logo-10.png', alt: 'Mister Mobility', cls: 'lw-mrmobility' },
+  { file: 'logo-11.svg', alt: 'Den Engelsen Exclusive', cls: 'lw-denengelsen' },
+  { file: 'logo-12.svg', alt: 'Transhair', cls: 'lw-transhair' },
 ];
-const LOGO_FILES = [...LOGO_BRANDS, ...LOGO_BRANDS, ...LOGO_BRANDS, ...LOGO_BRANDS];
+// Second copy must be exactly half the track (aria-hidden at i >= LOGO_BRANDS.length).
+const LOGO_FILES = [...LOGO_BRANDS, ...LOGO_BRANDS];
 
 export default function Page() {
   return (
@@ -288,8 +295,8 @@ export default function Page() {
         <div className="lw-marquee">
           <div className="lw-track" data-lw="-1">
             {LOGO_FILES.map((logo, i) => (
-              <span className="lw-slot" aria-hidden={i >= 12 ? true : undefined} key={i}>
-                <img src={`/logos/${logo.file}`} alt={i >= 12 ? '' : logo.alt} className={logo.cls} />
+              <span className="lw-slot" aria-hidden={i >= LOGO_BRANDS.length ? true : undefined} key={i}>
+                <img src={`/logos/${logo.file}`} alt={i >= LOGO_BRANDS.length ? '' : logo.alt} className={logo.cls} />
               </span>
             ))}
           </div>

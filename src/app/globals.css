@@ -285,6 +285,12 @@
   .lw-slot img.lw-labelateam{max-height:58px;max-width:78%}
   .lw-slot img.lw-reform{max-height:44px;max-width:78%}
   .lw-slot img.lw-noord{max-height:64px;max-width:72%}
+  .lw-slot img.lw-bergman{max-height:54px;max-width:78%}
+  .lw-slot img.lw-bear{max-height:72px;max-width:78%}
+  .lw-slot img.lw-douma{max-height:46px;max-width:78%}
+  .lw-slot img.lw-mrmobility{max-height:26px;max-width:78%;filter:brightness(0)}
+  .lw-slot img.lw-denengelsen{max-height:34px;max-width:78%}
+  .lw-slot img.lw-transhair{max-height:34px;max-width:78%}
 
   /* ---------- TESTIMONIAL VIDEO ---------- */
   .testi{position:relative;border-top:var(--hair) solid var(--rule)}
@@ -926,4 +932,10 @@
     .lw-slot img.lw-labelateam{max-height:38px}
     .lw-slot img.lw-reform{max-height:30px}
     .lw-slot img.lw-noord{max-height:42px}
+    .lw-slot img.lw-bergman{max-height:36px}
+    .lw-slot img.lw-bear{max-height:46px}
+    .lw-slot img.lw-douma{max-height:30px}
+    .lw-slot img.lw-mrmobility{max-height:18px}
+    .lw-slot img.lw-denengelsen{max-height:24px}
+    .lw-slot img.lw-transhair{max-height:24px}
   }
